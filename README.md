@@ -1,30 +1,61 @@
-# CT→MRI Latent Diffusion Pipeline
+# CT → MRI using Latent Diffusion Models (LDM)
 
-A research-style end-to-end notebook project for **CT-to-MRI synthesis** using a **latent diffusion workflow** in PyTorch, with both generative and clinical evaluation stages.
+An end-to-end, notebook-based research pipeline for **CT-to-MRI image synthesis** using a **latent diffusion approach** in PyTorch, followed by both **image quality** and **clinical downstream** evaluation.
 
-## Project Structure
+---
+
+## ✨ Highlights
+
+- 🧠 **Latent-space generation** rather than direct pixel-space generation
+- 🔁 **Multi-stage training workflow** (VAE → CT-latent mapper → conditional diffusion)
+- ⚖️ **Baseline comparison** with direct CT→MRI U-Net
+- 📊 **Quantitative evaluation** (reconstruction/generation metrics + CSV logging)
+- 🏥 **Clinical relevance check** via tumor classification and uncertainty-aware reporting
+
+---
+
+## 📁 Repository Structure
 
 ```text
 .
-├── ct_to_mri_latent_diffusion_pipeline.ipynb
-└── README.md
+├── ct_to_mri_latent_diffusion_pipeline.ipynb   # Full pipeline implementation
+└── README.md                                   # Project overview and usage guide
 ```
 
-## What This Notebook Covers
+> This repository is intentionally notebook-centric.
 
-The notebook implements a multi-stage pipeline:
+---
 
-1. **Data setup and loading** for paired CT/MRI-style images.
-2. **MRI autoencoder (VAE)** training and reconstruction analysis.
-3. **CT→latent bridge model** training and evaluation.
-4. **Conditional diffusion model (DDPM-style U-Net)** for MRI generation.
-5. **Direct CT→MRI U-Net baseline** for comparison.
-6. **Quantitative metrics logging** (e.g., PSNR/SSIM-related outputs to CSV).
-7. **Clinical downstream stage** (tumor classification, ROC/confusion matrices, uncertainty/CI reporting).
+## 🧪 End-to-End Pipeline Overview
 
-## Environment
+The notebook implements a staged workflow:
 
-Core libraries used in the notebook include:
+1. **Data Loading & Preparation**  
+   Load paired CT/MRI-style samples and perform preprocessing for model training.
+
+2. **MRI Autoencoder (VAE) Training**  
+   Learn a compact latent representation of MRI data and assess reconstruction quality.
+
+3. **CT → MRI-Latent Bridge Model**  
+   Train a model that maps CT information into the learned MRI latent space.
+
+4. **Conditional Diffusion (DDPM-style U-Net)**  
+   Generate MRI outputs from CT-conditioned latent dynamics.
+
+5. **Direct CT → MRI U-Net Baseline**  
+   Train and compare a direct mapping baseline against the latent diffusion route.
+
+6. **Generative Metric Logging**  
+   Record metrics (e.g., PSNR/SSIM-related outputs) to CSV files for analysis.
+
+7. **Clinical Downstream Evaluation**  
+   Run tumor classification analyses, ROC/confusion assessments, and uncertainty/CI reporting.
+
+---
+
+## 🛠️ Tech Stack
+
+Main libraries used in the notebook include:
 
 - `torch`, `torchvision`
 - `numpy`, `pandas`
@@ -35,29 +66,68 @@ Core libraries used in the notebook include:
 - `Pillow`
 - `tqdm`
 
-## Quick Start
+---
 
-1. Create and activate a Python environment (3.9+ recommended).
-2. Install the required packages listed above.
-3. Open the notebook:
-   - `ct_to_mri_latent_diffusion_pipeline.ipynb`
-4. Run cells in order.
+## 🚀 Getting Started
 
-## Expected Artifacts
+### 1) Create an environment
 
-During runs, the notebook can produce files such as:
+Use Python **3.9+** (recommended):
 
-- Checkpoints (`*.pth`)
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+Windows alternatives:
+
+```powershell
+# PowerShell
+.venv\Scripts\Activate.ps1
+
+# Windows Command Prompt (cmd)
+.venv\Scripts\activate.bat
+```
+
+### 2) Install dependencies
+
+Install the libraries listed in the tech stack section (or your own pinned equivalents), for example:
+
+```bash
+pip install torch torchvision numpy pandas matplotlib scikit-image scikit-learn nibabel Pillow tqdm
+```
+
+### 3) Open and run the notebook
+
+Notebook to run:
+
+- `ct_to_mri_latent_diffusion_pipeline.ipynb`
+
+Run cells **top-to-bottom in order** to preserve stage dependencies.
+
+---
+
+## 📤 Typical Outputs
+
+Depending on configuration and run length, you may generate:
+
+- Model checkpoints (`*.pth`)
 - Visual outputs (`*.png`, `*.jpg`)
-- Metrics reports (`generative_metrics.csv`, clinical evaluation CSVs)
+- Metrics files (for example, `generative_metrics.csv` and clinical evaluation CSVs)
+- Diagnostic plots (e.g., ROC curves/confusion matrix visualizations)
 
-## Suggested Repository Name
+---
 
-If you want a cleaner, publication-friendly repository name, a strong option is:
+## 📌 Notes on Reproducibility
 
-**`ct-to-mri-latent-diffusion-pipeline`**
+- Keep large datasets and heavyweight checkpoints outside the Git repository.
+- Prefer external storage / release assets for artifact sharing.
+- For consistent comparisons, keep preprocessing and split logic fixed across experiments.
 
-## Notes
+---
 
-- This repository is notebook-centric by design.
-- For reproducibility, keep datasets and large checkpoints outside the repository and link them in release assets or external storage.
+## ⚠️ Current Scope
+
+- This project is currently delivered as a **single comprehensive notebook**.
+- There is no packaged module/API yet.
+- Environment and dependency pinning may vary by runtime setup.
