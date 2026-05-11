@@ -76,7 +76,17 @@ Use Python **3.9+** (recommended):
 
 ```bash
 python -m venv .venv
-source .venv/bin/activate   # On Windows: .venv\Scripts\activate
+source .venv/bin/activate
+```
+
+Windows alternatives:
+
+```powershell
+# PowerShell
+.venv\Scripts\Activate.ps1
+
+# Command Prompt (cmd)
+.venv\Scripts\activate.bat
 ```
 
 ### 2) Install dependencies
@@ -117,11 +127,3 @@ Depending on configuration and run length, you may generate:
 - This project is currently delivered as a **single comprehensive notebook**.
 - There is no packaged module/API yet.
 - Environment and dependency pinning may vary by runtime setup.
-
----
-
-## 📚 Suggested Citation / Naming
-
-If you want a publication-friendly repository name, a clean option is:
-
-**`ct-to-mri-latent-diffusion-pipeline`**
