@@ -85,13 +85,17 @@ Windows alternatives:
 # PowerShell
 .venv\Scripts\Activate.ps1
 
-# Command Prompt (cmd)
+# Windows Command Prompt (cmd)
 .venv\Scripts\activate.bat
 ```
 
 ### 2) Install dependencies
 
-Install the libraries listed in the tech stack section (or your own pinned equivalents).
+Install the libraries listed in the tech stack section (or your own pinned equivalents), for example:
+
+```bash
+pip install torch torchvision numpy pandas matplotlib scikit-image scikit-learn nibabel Pillow tqdm
+```
 
 ### 3) Open and run the notebook
 
